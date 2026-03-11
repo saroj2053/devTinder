@@ -2,8 +2,20 @@ import express, { Request, Response } from "express";
 import chalk from "chalk";
 import connectDB from "./config/database";
 import { errorHandler } from "./middlewares/error.middleware";
+import cookieParser from "cookie-parser";
+import cors from "cors";
+import authRoutes from "./routes/auth.route";
 
 const app = express();
+
+app.use(express.json());
+app.use(cookieParser());
+app.use(cors({
+    origin: process.env.CLIENT_URL,
+    credentials: true,
+}));
+
+app.use("/api/v1/auth", authRoutes);
 
 /*
 * @desc    Welcome route
