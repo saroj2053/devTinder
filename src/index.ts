@@ -1,6 +1,7 @@
-import express, { Request, Response } from 'express';
-import chalk from 'chalk';
+import express, { Request, Response } from "express";
+import chalk from "chalk";
 import connectDB from "./config/database";
+import { errorHandler } from "./middlewares/error.middleware";
 
 const app = express();
 
@@ -24,6 +25,8 @@ app.get("/health", (req: Request, res: Response) => {
     res.json({ status: "Server is running smoothly 🚀" });
 });
 
+
+app.use(errorHandler);
 
 const PORT = process.env.SERVER_PORT || 3000;
 
