@@ -9,6 +9,9 @@ import authRoutes from "./routes/auth.route";
 import profileRoutes from "./routes/profile.route";
 import requestRoutes from "./routes/request.route";
 import userRoutes from "./routes/user.route";
+import chatRoutes from "./routes/chat.route";
+import http from "node:http";
+import initializeSocket from "./utils/socket";
 
 const app = express();
 
@@ -23,6 +26,10 @@ app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/profile", profileRoutes);
 app.use("/api/v1/request", requestRoutes);
 app.use("/api/v1/user", userRoutes);
+app.use("/api/v1/chat", chatRoutes);
+
+const server = http.createServer(app);
+initializeSocket(server);
 
 /*
 * @desc    Welcome route
@@ -51,7 +58,7 @@ const PORT = process.env.SERVER_PORT || 3000;
 
 connectDB().then(() => {
     console.log(chalk.italic.cyan("Database connected successfully..."));
-    app.listen(PORT, () => {
+    server.listen(PORT, () => {
         console.log(chalk.italic.blue(`Server is running on http://localhost:${PORT}`));
     });
 }).catch((error) => {
