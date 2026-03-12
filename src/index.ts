@@ -5,6 +5,7 @@ import { errorHandler } from "./middlewares/error.middleware";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import authRoutes from "./routes/auth.route";
+import profileRoutes from "./routes/profile.route";
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(cors({
 }));
 
 app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/profile", profileRoutes);
 
 /*
 * @desc    Welcome route
