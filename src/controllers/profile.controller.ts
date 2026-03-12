@@ -21,7 +21,7 @@ export const getProfile = async (req: Request, res: Response, next: NextFunction
 
 /*
 * @desc    Update user profile
-* @route   PATCH /api/v1/profile/:userId
+* @route   PATCH /api/v1/profile
 * @access  Private
 */
 export const updateProfile = async (req: Request, res: Response, next: NextFunction) => {

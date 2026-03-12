@@ -1,4 +1,5 @@
 import express, { Request, Response } from "express";
+import "dotenv/config";
 import chalk from "chalk";
 import connectDB from "./config/database";
 import { errorHandler } from "./middlewares/error.middleware";
@@ -6,6 +7,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import authRoutes from "./routes/auth.route";
 import profileRoutes from "./routes/profile.route";
+import requestRoutes from "./routes/request.route";
 
 const app = express();
 
@@ -18,6 +20,7 @@ app.use(cors({
 
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/profile", profileRoutes);
+app.use("/api/v1/request", requestRoutes);
 
 /*
 * @desc    Welcome route
