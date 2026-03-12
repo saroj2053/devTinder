@@ -3,6 +3,15 @@
   "version": "1.0.0",
   "description": "",
   "license": "ISC",
+  "keywords": [
+    "nodejs",
+    "express",
+    "typescript",
+    "mongodb",
+    "mongoose",
+    "jwt",
+    "bcrypt"
+  ],
   "author": "Saroj Sah",
   "type": "commonjs",
   "main": "./src/index.ts",

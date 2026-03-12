@@ -14,8 +14,8 @@ export const validateSignupData = (req: SignupDataType) => {
     const { firstName, lastName, emailId, password } = req.body;
     if (!firstName || !lastName) {
         throw new AppError("Name is not valid", 400);
-    } else if (firstName.length < 4 || firstName.length > 50) {
-        throw new AppError("First name must be between 4 and 50 characters", 400);
+    } else if (firstName.length < 2 || firstName.length > 50) {
+        throw new AppError("First name must be between 2 and 50 characters", 400);
     } else if (!validator.isEmail(emailId)) {
         throw new AppError("Invalid email address", 400);
     } else if (password.length < 8) {
