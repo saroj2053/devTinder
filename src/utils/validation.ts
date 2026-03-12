@@ -24,3 +24,25 @@ export const validateSignupData = (req: SignupDataType) => {
         throw new AppError("Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 symbol", 400);
     }
 }
+
+type EditProfileDataType = {
+    body: {
+        firstName?: string;
+        lastName?: string;
+        profileAvatarUrl?: string;
+        about?: string;
+        skills?: string[];
+        age?: number;
+        gender?: string;
+    };
+}
+
+export const validateEditProfileData = (req: EditProfileDataType) => {
+    const allowedEditFields = ["firstName", "lastName", "profileAvatarUrl", "about", "skills", "age", "gender"];
+
+    const isEditAllowed = Object.keys(req.body).every((field) => {
+        return allowedEditFields.includes(field);
+    });
+
+    return isEditAllowed;
+}
