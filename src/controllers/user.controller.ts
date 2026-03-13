@@ -68,6 +68,15 @@ export const getUserFeed = async (req: Request, res: Response, next: NextFunctio
     try {
         const loggedInUser = req.user;
 
+        const pageParam = Array.isArray(req.query.page) ? req.query.page[0] : req.query.page;
+        const limitParam = Array.isArray(req.query.limit) ? req.query.limit[0] : req.query.limit;
+        console.log(pageParam, limitParam);
+
+        const page = parseInt(pageParam as string || "1", 10);
+        let limit = parseInt(limitParam as string || "10", 10);
+        limit = limit > 14 ? 14 : limit;
+        const skip = (page - 1) * limit;
+
         const connectionRequests = await ConnectionRequest.find({
             $or: [
                 { fromUserId: loggedInUser._id },
@@ -88,7 +97,7 @@ export const getUserFeed = async (req: Request, res: Response, next: NextFunctio
                 { _id: { $ne: loggedInUser._id } },
                 { _id: { $nin: Array.from(hiddenUsersFromFeed) as any } }
             ]
-        }).select(USER_SAFE_DATA);
+        }).select(USER_SAFE_DATA).skip(skip).limit(limit);
 
         res.send({ users });
 
